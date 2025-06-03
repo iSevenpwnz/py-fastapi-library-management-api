@@ -14,15 +14,16 @@ class BaseAppSettings(BaseSettings):
 class Settings(BaseAppSettings):
     """Postgres settings."""
 
-    POSTGRES_USER: str = 'test_user'
-    POSTGRES_PASSWORD: str = 'test_password'
-    POSTGRES_HOST: str = 'test_host'
+    POSTGRES_USER: str = "test_user"
+    POSTGRES_PASSWORD: str = "test_password"
+    POSTGRES_HOST: str = "test_host"
     POSTGRES_PORT: int = 5432
-    POSTGRES_DB: str = 'test_db'
+    POSTGRES_DB: str = "test_db"
 
     class Config:
         """Pydantic config."""
-        env_file = '.env'
+
+        env_file = ".env"
 
 
 def get_settings() -> BaseSettings:

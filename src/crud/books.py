@@ -34,7 +34,7 @@ async def create_book(db: AsyncSession, book: BookCreateSchema):
     """Create a new book, checking for author existence and unique title."""
     author = await authors_crud.get_author_by_id(db, book.author_id)
     if not author:
-        raise ValueError('Author does not exist')
+        raise ValueError("Author does not exist")
 
     db_book = DbBook(**book.model_dump())
     db.add(db_book)
@@ -44,4 +44,4 @@ async def create_book(db: AsyncSession, book: BookCreateSchema):
         return db_book
     except IntegrityError:
         await db.rollback()
-        raise ValueError('Book with this title already exists')
+        raise ValueError("Book with this title already exists")

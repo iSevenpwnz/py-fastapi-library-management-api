@@ -39,6 +39,7 @@ class AuthorBaseSchema(BaseModel):
 
 class AuthorCreateSchema(AuthorBaseSchema):
     """Schema for creating an author."""
+
     pass
 
 
@@ -56,17 +57,17 @@ class AuthorDetailSchema(AuthorBaseSchema):
 
     model_config = ConfigDict(
         json_schema_extra={
-            'example': {
-                'id': 2,
-                'name': 'Joan Roaling',
-                'bio': 'Best writer',
-                'books': [
+            "example": {
+                "id": 2,
+                "name": "Joan Roaling",
+                "bio": "Best writer",
+                "books": [
                     {
-                        'id': 21,
-                        'title': 'Harry Potter',
-                        'summary': 'Phylosopher Stone',
-                        'publication_date': '2025-05-29',
-                        'author_id': 2,
+                        "id": 21,
+                        "title": "Harry Potter",
+                        "summary": "Phylosopher Stone",
+                        "publication_date": "2025-05-29",
+                        "author_id": 2,
                     }
                 ],
             }
@@ -82,12 +83,16 @@ class BookDetailSchema(BookBaseSchema):
 
     model_config = ConfigDict(
         json_schema_extra={
-            'example': {
-                'id': 21,
-                'title': 'Harry Potter',
-                'summary': 'Phylosopher Stone',
-                'publication_date': '2025-05-29',
-                'author': {'id': 2, 'name': 'Joan Roaling', 'bio': 'Best writer'},
+            "example": {
+                "id": 21,
+                "title": "Harry Potter",
+                "summary": "Phylosopher Stone",
+                "publication_date": "2025-05-29",
+                "author": {
+                    "id": 2,
+                    "name": "Joan Roaling",
+                    "bio": "Best writer",
+                },
             }
         }
     )

@@ -21,7 +21,7 @@ from src.schemas.schemas import (
 router = APIRouter()
 
 
-@router.get('/authors/', response_model=Page[AuthorReadSchema])
+@router.get("/authors/", response_model=Page[AuthorReadSchema])
 async def get_authors(
     params: Params = Depends(),
     db: AsyncSession = Depends(get_db),
@@ -31,16 +31,16 @@ async def get_authors(
     return await paginate(db, query, params)
 
 
-@router.get('/authors/{author_id}', response_model=AuthorDetailSchema)
+@router.get("/authors/{author_id}", response_model=AuthorDetailSchema)
 async def get_author(author_id: int, db: AsyncSession = Depends(get_db)):
     """Get author by id."""
     author = await authors_crud.get_author_by_id(db, author_id)
     if not author:
-        raise HTTPException(status_code=404, detail='Author not found')
+        raise HTTPException(status_code=404, detail="Author not found")
     return AuthorDetailSchema.model_validate(author)
 
 
-@router.post('/authors/', response_model=AuthorReadSchema)
+@router.post("/authors/", response_model=AuthorReadSchema)
 async def create_author(
     author: AuthorCreateSchema,
     db: AsyncSession = Depends(get_db),
@@ -50,11 +50,13 @@ async def create_author(
     return AuthorReadSchema.model_validate(db_author)
 
 
-@router.get('/books/', response_model=Page[BookReadSchema])
+@router.get("/books/", response_model=Page[BookReadSchema])
 async def get_books(
     params: Params = Depends(),
     db: AsyncSession = Depends(get_db),
-    author_id: int | None = Query(None, description='Filter books by author ID'),
+    author_id: int | None = Query(
+        None, description="Filter books by author ID"
+    ),
 ):
     """Get paginated list of books, optionally filtered by author_id."""
     query = select(DbBook).order_by(DbBook.id)
@@ -63,16 +65,16 @@ async def get_books(
     return await paginate(db, query, params)
 
 
-@router.get('/books/{book_id}', response_model=BookDetailSchema)
+@router.get("/books/{book_id}", response_model=BookDetailSchema)
 async def get_book(book_id: int, db: AsyncSession = Depends(get_db)):
     """Get book by id."""
     book = await books_crud.get_book_by_id(db, book_id)
     if not book:
-        raise HTTPException(status_code=404, detail='Book not found')
+        raise HTTPException(status_code=404, detail="Book not found")
     return BookDetailSchema.model_validate(book)
 
 
-@router.post('/books/', response_model=BookReadSchema)
+@router.post("/books/", response_model=BookReadSchema)
 async def create_book(
     book: BookCreateSchema,
     db: AsyncSession = Depends(get_db),

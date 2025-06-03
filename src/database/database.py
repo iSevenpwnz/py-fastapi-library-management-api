@@ -10,7 +10,7 @@ from src.config.settings import get_settings
 
 settings = get_settings()
 
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./library.db'
+SQLALCHEMY_DATABASE_URL = "sqlite:///./library.db"
 
 # Postgres settings
 # SQLALCHEMY_DATABASE_URL = (
@@ -20,7 +20,9 @@ SQLALCHEMY_DATABASE_URL = 'sqlite:///./library.db'
 
 engine = create_async_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
 
-SessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+SessionLocal = async_sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
+)
 
 
 async def get_db():
